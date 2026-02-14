@@ -48,6 +48,15 @@ const similarBlogs = [
   },
 ];
 
+export function generateStaticParams() {
+  return [
+    { slug: "world-music" },
+    { slug: "mastering-guitar-basics" },
+    { slug: "history-of-classical-piano" },
+    { slug: "music-theory-fundamentals" },
+  ];
+}
+
 export default function BlogDetailPage() {
   const paragraphs = blogData.content
     .trim()
