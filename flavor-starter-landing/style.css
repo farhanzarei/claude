@@ -1,0 +1,613 @@
+/*
+Theme Name: Flavor Starter Landing
+Theme URI: https://github.com/flavor-starter-landing
+Author: Flavor
+Author URI: https://github.com/flavor-starter-landing
+Description: A minimal landing page theme designed for shoe brand catalogs. Features a clean hero section, product showcase grid, and brand story section — all manageable from the WordPress Customizer.
+Version: 1.0.0
+Requires at least: 5.9
+Tested up to: 6.4
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: flavor-starter-landing
+Tags: one-column, custom-colors, custom-logo, featured-images, full-width-template, translation-ready
+*/
+
+/* ========== Reset & Base ========== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --color-primary: #1a1a1a;
+    --color-secondary: #f5f0eb;
+    --color-accent: #c8956c;
+    --color-text: #333333;
+    --color-text-light: #777777;
+    --color-white: #ffffff;
+    --color-border: #e0e0e0;
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --max-width: 1200px;
+    --section-padding: 100px 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    line-height: 1.7;
+    background-color: var(--color-white);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    width: 90%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+/* ========== Typography ========== */
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-primary);
+}
+
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); }
+h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
+
+/* ========== Header / Navigation ========== */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--color-border);
+    transition: background 0.3s ease;
+}
+
+.site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+}
+
+.site-branding .custom-logo {
+    max-height: 45px;
+    width: auto;
+}
+
+.site-branding .site-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-primary);
+}
+
+.site-branding .site-title a {
+    color: inherit;
+}
+
+.main-navigation ul {
+    display: flex;
+    gap: 35px;
+}
+
+.main-navigation a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-text);
+    position: relative;
+}
+
+.main-navigation a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: var(--color-accent);
+    transition: width 0.3s ease;
+}
+
+.main-navigation a:hover::after {
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background: var(--color-primary);
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* ========== Hero Section ========== */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--color-secondary);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    padding-top: 80px;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    padding: 0 20px;
+}
+
+.hero-section h1 {
+    color: var(--color-white);
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.hero-section p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.15rem;
+    margin-bottom: 40px;
+    line-height: 1.8;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 45px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: var(--color-accent);
+    color: var(--color-white);
+}
+
+.btn-primary:hover {
+    background: #b37f5a;
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--color-white);
+    border: 1.5px solid var(--color-white);
+}
+
+.btn-outline:hover {
+    background: var(--color-white);
+    color: var(--color-primary);
+}
+
+/* ========== Section Common ========== */
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-header h2 {
+    margin-bottom: 15px;
+}
+
+.section-header p {
+    color: var(--color-text-light);
+    font-size: 1.05rem;
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+.section-divider {
+    width: 50px;
+    height: 2px;
+    background: var(--color-accent);
+    margin: 15px auto 0;
+}
+
+/* ========== Products / Catalog Section ========== */
+.catalog-section {
+    padding: var(--section-padding);
+    background: var(--color-white);
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.product-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+.product-image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    background: var(--color-secondary);
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.05);
+}
+
+.product-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--color-accent);
+    color: var(--color-white);
+    padding: 5px 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.product-info {
+    padding: 25px;
+}
+
+.product-info h3 {
+    margin-bottom: 8px;
+}
+
+.product-info .product-description {
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.product-info .product-price {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+/* ========== Brand Story / About Section ========== */
+.about-section {
+    padding: var(--section-padding);
+    background: var(--color-secondary);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.about-image {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.about-content h2 {
+    margin-bottom: 25px;
+}
+
+.about-content p {
+    color: var(--color-text-light);
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.about-content .btn {
+    margin-top: 15px;
+}
+
+/* ========== Features / Highlights ========== */
+.features-section {
+    padding: var(--section-padding);
+    background: var(--color-white);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 40px;
+    text-align: center;
+}
+
+.feature-item {
+    padding: 30px 20px;
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--color-accent);
+}
+
+.feature-item h3 {
+    margin-bottom: 12px;
+    font-size: 1.15rem;
+}
+
+.feature-item p {
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+}
+
+/* ========== CTA Section ========== */
+.cta-section {
+    padding: 80px 0;
+    background: var(--color-primary);
+    text-align: center;
+}
+
+.cta-section h2 {
+    color: var(--color-white);
+    margin-bottom: 15px;
+}
+
+.cta-section p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.05rem;
+    margin-bottom: 35px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ========== Footer ========== */
+.site-footer {
+    padding: 60px 0 30px;
+    background: var(--color-primary);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-brand .site-title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: var(--color-white);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.footer-brand p {
+    line-height: 1.8;
+    max-width: 350px;
+}
+
+.footer-links h4 {
+    color: var(--color-white);
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links a:hover {
+    color: var(--color-accent);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 25px;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+/* ========== WordPress Core ========== */
+.alignwide {
+    max-width: var(--max-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.alignfull {
+    width: 100%;
+    max-width: 100%;
+}
+
+.wp-caption {
+    max-width: 100%;
+}
+
+.wp-caption-text {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    margin-top: 8px;
+}
+
+.screen-reader-text {
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute !important;
+    width: 1px;
+    word-wrap: normal !important;
+}
+
+/* ========== Page Template ========== */
+.page-content {
+    padding: 120px 0 80px;
+    min-height: 60vh;
+}
+
+.page-content h1 {
+    margin-bottom: 30px;
+}
+
+.page-content p {
+    margin-bottom: 15px;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+    :root {
+        --section-padding: 60px 0;
+    }
+
+    .site-header .container {
+        height: 65px;
+    }
+
+    .main-navigation {
+        display: none;
+        position: absolute;
+        top: 65px;
+        left: 0;
+        width: 100%;
+        background: var(--color-white);
+        border-bottom: 1px solid var(--color-border);
+        padding: 20px 0;
+    }
+
+    .main-navigation.is-open {
+        display: block;
+    }
+
+    .main-navigation ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .hero-section {
+        min-height: 80vh;
+        padding-top: 65px;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .about-image {
+        aspect-ratio: 16 / 9;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-section p {
+        font-size: 1rem;
+    }
+
+    .btn {
+        padding: 12px 35px;
+    }
+}
