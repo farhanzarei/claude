@@ -1,0 +1,33 @@
+name: Daily Commit
+
+on:
+  schedule:
+    - cron: '0 12 * * *'  # هر روز ساعت ۱۲ ظهر UTC
+  workflow_dispatch:       # امکان اجرای دستی
+
+jobs:
+  daily-commit:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update daily log
+        run: |
+          mkdir -p daily-log
+          DATE=$(date '+%Y-%m-%d')
+          TIME=$(date '+%H:%M:%S UTC')
+          echo "[$DATE $TIME] Daily automated commit" >> daily-log/activity.log
+          echo "Last updated: $DATE" > daily-log/README.md
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add daily-log/
+          git commit -m "chore: daily activity log - $(date '+%Y-%m-%d')"
+          git push
